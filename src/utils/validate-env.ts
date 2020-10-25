@@ -1,9 +1,13 @@
-import { cleanEnv, port, str } from 'envalid';
+import { bool, cleanEnv, json, port, str } from 'envalid';
 
 export default  function validateEnv() {
   cleanEnv(process.env, {
     NODE_ENV: str(),
-    API_TOKEN: str(),
-    PORT: port()
+    API_KEY: str(),
+    CWD: str(),
+    SHELL: str({ default: '/bin/sh' }),
+    CORS_ORIGINS: json({ default: [ 'http://localhost' ] }),
+    EXPOSE_SWAGGER: bool({ default: false }),
+    PORT: port({ default: 3000 })
   });
 }

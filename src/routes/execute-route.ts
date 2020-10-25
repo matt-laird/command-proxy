@@ -2,7 +2,7 @@ import { Router } from 'express';
 import ExecuteController from '../controllers/execute-controller';
 import { CreateScriptDto } from '../dtos/script-dto';
 import Route from '../interfaces/routes-interface';
-import tokenMiddleware from '../middlewares/token-middleware';
+import apikeyMiddleware from '../middlewares/apikey-middleware';
 import validationMiddleware from '../middlewares/validation-middleware';
 
 export default class ExecuteRoute implements Route {
@@ -17,7 +17,7 @@ export default class ExecuteRoute implements Route {
   private initializeRoutes() {
     this.router.post(
       this.path,
-      tokenMiddleware,
+      apikeyMiddleware,
       validationMiddleware(CreateScriptDto),
       this.executeController.execute
     );

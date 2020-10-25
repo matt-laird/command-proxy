@@ -1,4 +1,3 @@
-import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
@@ -9,28 +8,29 @@ import errorMiddleware from './middlewares/error-middleware';
 
 export default class App {
   app: express.Application;
-  port: (string | number);
+  port: number;
+  corsOrgins: string[];
   env: boolean;
 
   constructor(routes: Routes[]) {
     this.app = express();
-    this.port = process.env.PORT || 3000;
     this.env = process.env.NODE_ENV === 'production' ? true : false;
+    this.port = Number(process.env.PORT);
+    this.corsOrgins = JSON.parse(process.env.CORS_ORIGINS);
+
+    if (Boolean(process.env.EXPOSE_SWAGGER)) {
+      this.initializeSwagger();
+    }
 
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
-    this.initializeSwagger();
     this.initializeErrorHandling();
   }
 
   listen() {
     this.app.listen(this.port, () => {
-      console.log(`🚀 App listening on the port ${this.port}`);
+      console.log(`App listening on the port ${this.port}`);
     });
-  }
-
-  getServer() {
-    return this.app;
   }
 
   private initializeMiddlewares() {
@@ -38,15 +38,14 @@ export default class App {
       this.app.use(hpp());
       this.app.use(helmet());
       this.app.use(logger('combined'));
-      this.app.use(cors({ origin: 'your.domain.com', credentials: true }));
+      this.app.use(cors({ origin: this.corsOrgins }));
     } else {
       this.app.use(logger('dev'));
-      this.app.use(cors({ origin: true, credentials: true }));
+      this.app.use(cors({ origin: true }));
     }
 
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
-    this.app.use(cookieParser());
   }
 
   private initializeRoutes(routes: Routes[]) {
