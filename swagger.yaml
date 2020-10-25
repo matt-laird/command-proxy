@@ -1,0 +1,38 @@
+tags:
+- name: execute
+  description: execute API
+
+paths:
+  /execute:
+    post:
+      tags:
+        - execute
+      summary: Execute a script at a given path
+      parameters:
+        - name: body
+          in: body
+          description: user Data
+          required: true
+          schema:
+            $ref: '#/definitions/execute'
+      responses:
+        200:
+          description: 'Success'
+        400:
+          description: 'Bad Request'
+        401:
+          description: 'Unauthorized'
+
+definitions:
+  execute:
+    type: object
+    required:
+      - path
+    properties:
+      path:
+        type: string
+        description: user Email
+
+schemes:
+  - https
+  - http
