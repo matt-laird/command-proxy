@@ -17,7 +17,7 @@ export default class App {
     this.app = express();
     this.env = envValue<boolean>('isProduction');
     this.port = envValue('PORT');
-    this.corsOrgins = JSON.parse(envValue('CORS_ORIGINS'));
+    this.corsOrgins = envValue<string[]>('CORS_ORIGINS');
 
     if (envValue<boolean>('EXPOSE_SWAGGER')) {
       this.initializeSwagger();
