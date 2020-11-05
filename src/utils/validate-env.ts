@@ -7,6 +7,7 @@ export default  function validateEnv() {
     CWD: str(),
     SHELL: str({ default: '/bin/sh' }),
     CORS_ORIGINS: json({ default: [ 'http://localhost' ] }),
+    ALLOW_SCRIPT_ARGUMENTS: bool({ default: false }),
     EXPOSE_SWAGGER: bool({ default: false }),
     PORT: port({ default: 3000 })
   });

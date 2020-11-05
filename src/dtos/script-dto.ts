@@ -1,13 +1,14 @@
-import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsOptional, IsString } from 'class-validator';
 
 export class CreateScriptDto {
   @IsString()
   path: string;
 
-  // @IsArray()
-  // params: string[];
-
-  @IsBoolean()
   @IsOptional()
+  @IsArray()
+  args?: string[];
+
+  @IsOptional()
+  @IsBoolean()
   waitTillComplete?: boolean;
 }
