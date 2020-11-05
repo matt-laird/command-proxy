@@ -1,6 +1,6 @@
 import { bool, cleanEnv, json, port, str } from 'envalid';
 
-export default  function validateEnv() {
+export default function validateEnv() {
   cleanEnv(process.env, {
     NODE_ENV: str(),
     API_KEY: str(),

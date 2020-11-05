@@ -5,6 +5,7 @@ import hpp from 'hpp';
 import logger from 'morgan';
 import Routes from './interfaces/routes-interface';
 import errorMiddleware from './middlewares/error-middleware';
+import { envValue } from './utils/util';
 
 export default class App {
   app: express.Application;
@@ -14,11 +15,11 @@ export default class App {
 
   constructor(routes: Routes[]) {
     this.app = express();
-    this.env = process.env.NODE_ENV === 'production' ? true : false;
-    this.port = Number(process.env.PORT);
-    this.corsOrgins = JSON.parse(process.env.CORS_ORIGINS);
+    this.env = envValue<boolean>('isProduction');
+    this.port = envValue('PORT');
+    this.corsOrgins = JSON.parse(envValue('CORS_ORIGINS'));
 
-    if (Boolean(process.env.EXPOSE_SWAGGER)) {
+    if (envValue<boolean>('EXPOSE_SWAGGER')) {
       this.initializeSwagger();
     }
 

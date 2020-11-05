@@ -1,9 +1,14 @@
 import fs from 'fs';
 
+// tslint:disable-next-line: one-variable-per-declaration
+export const envValue = <T = string>(key: string): T => {
+  return process.env[key] as unknown as T;
+};
+
 // tslint:disable-next-line: no-empty
 export const noop = (...params: any) => {};
 
-export const isNotSet = (value: any): boolean => {
+export const isValueSet = (value: any): boolean => {
   return value != null;
 };
 
