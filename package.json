@@ -6,10 +6,7 @@
     "dev": "cross-env NODE_ENV=development nodemon --watch src --delay 1 --exec 'ts-node' src/server.ts"
   },
   "dependencies": {
-    "class-transformer": "^0.3.1",
-    "class-validator": "^0.14.0",
     "cors": "^2.8.5",
-    "cross-env": "^7.0.3",
     "dotenv": "^8.6.0",
     "envalid": "^6.0.2",
     "express": "^4.18.2",
@@ -17,18 +14,19 @@
     "hpp": "^0.2.3",
     "morgan": "^1.10.0",
     "swagger-jsdoc": "^4.3.2",
-    "swagger-ui-express": "^4.6.2",
+    "swagger-ui-express": "^4.6.3",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.13",
-    "@types/dotenv": "^8.2.0",
+    "@types/cors": "^2.8.14",
     "@types/express": "^4.17.17",
-    "@types/helmet": "^4.0.0",
     "@types/hpp": "^0.2.2",
-    "@types/morgan": "^1.9.4",
-    "@types/node": "^14.18.42",
+    "@types/morgan": "^1.9.5",
+    "@types/node": "^14.18.58",
+    "class-transformer": "^0.3.1",
+    "class-validator": ">=0.14.0",
+    "cross-env": "^7.0.3",
     "nodemon": "^2.0.22"
   }
 }
